@@ -5,7 +5,7 @@
 
 //==============================================================================
 
-ffWndSetting::ffWndSetting(QWidget *parent):QWidget(parent)
+ffWndSetting::ffWndSetting(QWidget *parent):QDialog(parent)
 {
     //список наименований логических групп настроек приложения
     QStringList lst;
