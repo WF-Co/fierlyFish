@@ -1,3 +1,4 @@
+#include <QDebugStateSaver>
 #include <QDialog>
 #include <QGridLayout>
 // включаем заголовочный файл класса coreApp
@@ -122,28 +123,8 @@ void ffMDIWindow::slotAbout()
 
 //слот вывода окна настроек приложения
 void ffMDIWindow::slotSettingsApp()
-{
-   /* if(m_actAppSettings->isEnabled())
-    {
-        ffWndSetting* wndSettings = new ffWndSetting();
-        connect(wndSettings, &ffWndSetting::destroyed, this, &ffMDIWindow::slotSettingsApp);
-        //m_pma->addSubWindow(wndSettings);
-        wndSettings->show();
-        m_actAppSettings->setDisabled(true);
-    }
-    else
-    {
-        m_actAppSettings->setEnabled(true);
-    }
-    */
-    if(ffCoreApp::theApp()->pWndSettings())
-    {
-        ffCoreApp::theApp()->slotSettingsApp();
-    }
-    else
-    {
-        ffCoreApp::theApp()->pWndSettings()->show();
-    }
+{   
+    ffCoreApp::theApp()->slotSettingsApp();
 }
 
 void ffMDIWindow::createStatusBar()

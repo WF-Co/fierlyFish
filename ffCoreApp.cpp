@@ -61,7 +61,6 @@ void ffCoreApp::slotAbout()
 
 void ffCoreApp::slotSettingsApp()
 {
-    //m_pWndSettingsApp = new ffWndSetting;
     m_pWndSettingsApp->show();
 }
 

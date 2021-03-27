@@ -1,4 +1,4 @@
-#include <QtWidgets>
+//#include <QtWidgets>
 
 #include "ffCoreApp.h"
 #include "ffWndSettings.h"
