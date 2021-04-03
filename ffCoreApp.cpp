@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "ffCoreApp.h"
 
 ffCoreApp::ffCoreApp(int& argc, char** argv, const QString& strOrg, const QString& strAppName) : QApplication(argc, argv) , m_pSettings(nullptr)
@@ -61,7 +62,19 @@ void ffCoreApp::slotAbout()
 
 void ffCoreApp::slotSettingsApp()
 {
-    m_pWndSettingsApp->show();
+
+    //проверяем окно показывается пользователю или нет. В случае если окно показывается мы его делаем активным иначе показываем окно
+    if(!m_pWndSettingsApp->isVisible())
+    {
+        m_pWndSettingsApp->show();
+    }
+    else
+    {
+        m_pWndSettingsApp->activateWindow();
+    };
+
+
+
 }
 
 
