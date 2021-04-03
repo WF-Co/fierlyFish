@@ -1,6 +1,5 @@
 #ifndef MAINWND_H
 #define MAINWND_H
-
 //включаем заголовочные файлы Qt
 #include <QSettings>
 #include <QApplication>
@@ -16,6 +15,7 @@
 #include <QLabel>
 
 //#include "ffWndSettings.h"
+
 
 //определяем основной класс приложения (главное окно). Класс MainWnd унаследован от класса QMainWindow
 class ffMDIWindow : public QMainWindow
@@ -52,5 +52,8 @@ private:
 
     //Все QActions QMenu
     QAction*        m_actAppSettings;
+
+    //Окна приложения
+
 };
 #endif // MAINWND_H

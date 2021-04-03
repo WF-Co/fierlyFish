@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "ffCoreApp.h"
 
 ffCoreApp::ffCoreApp(int& argc, char** argv, const QString& strOrg, const QString& strAppName) : QApplication(argc, argv) , m_pSettings(nullptr)
@@ -17,6 +18,9 @@ ffCoreApp::ffCoreApp(int& argc, char** argv, const QString& strOrg, const QStrin
     m_psysTray = new ffSystemTray;
 
     connect(this, &QApplication::lastWindowClosed, this, &ffCoreApp::writeSettings);
+
+    //создаем окно настроек приложеиня
+    m_pWndSettingsApp = new ffWndSetting;
 }
 
 ffCoreApp::~ffCoreApp(){}
@@ -43,12 +47,34 @@ ffTranslator* ffCoreApp::ffTrans()
     return m_pTranslator;
 }
 
+ffWndSetting* ffCoreApp::pWndSettings()
+{
+    return m_pWndSettingsApp;
+}
+
 //**************************** СЛОТЫ ******************************************
 //реализация слота "О приложении"
 void ffCoreApp::slotAbout()
 {
     //вывод сообщения в окне соощения
     QMessageBox::about(m_psysTray, QObject::tr("ABOUTAPPLICATION"), ffCoreApp::theApp()->applicationName());
+}
+
+void ffCoreApp::slotSettingsApp()
+{
+
+    //проверяем окно показывается пользователю или нет. В случае если окно показывается мы его делаем активным иначе показываем окно
+    if(!m_pWndSettingsApp->isVisible())
+    {
+        m_pWndSettingsApp->show();
+    }
+    else
+    {
+        m_pWndSettingsApp->activateWindow();
+    };
+
+
+
 }
 
 

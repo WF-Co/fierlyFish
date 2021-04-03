@@ -1,12 +1,18 @@
-#include <QtWidgets>
-
+//#include <QtWidgets>
+#include <QObject>
 #include "ffCoreApp.h"
 #include "ffWndSettings.h"
 
 //==============================================================================
 
-ffWndSetting::ffWndSetting(QWidget *parent):QWidget(parent)
+ffWndSetting::ffWndSetting(QWidget *parent):QDialog(parent)
 {
+    //устанавливаем заголовок диалоговому окну
+    this->setWindowTitle(QObject::tr("SETTINGS_APPLICATION_FIERYFISH"));
+
+    //устанавливаем флаги диалогового окна. Убираем знак вопроса из заголовка
+    this->setWindowFlags(Qt::WindowTitleHint | Qt::WindowSystemMenuHint);
+
     //список наименований логических групп настроек приложения
     QStringList lst;
 

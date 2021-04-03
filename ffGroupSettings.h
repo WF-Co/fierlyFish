@@ -1,7 +1,8 @@
 #ifndef FFGROUPSETTINGS_H
 #define FFGROUPSETTINGS_H
 
-#include <QtWidgets>
+//#include <QtWidgets>
+#include <QListWidget>
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QVBoxLayout>

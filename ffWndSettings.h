@@ -13,7 +13,10 @@
 #ifndef FFWNDSETTINGS_H
 #define FFWNDSETTINGS_H
 
-#include <QtWidgets>
+//#include <QtWidgets>
+#include <QDialog>
+#include <QListWidget>
+#include <QStackedWidget>
 
 // включаем заголовочный файл класса coreApp
 #include "ffCoreApp.h"
@@ -26,7 +29,7 @@
 //===============================================================================================================
 
 //определяем класс окна настроек приложения. Класс MainWnd унаследован от класса QMainWindow
-class ffWndSetting : public QWidget
+class ffWndSetting : public QDialog
 {
     //специфичный макрос для распознания класса в МОС (метаобъектный компилятор), который нуждается в подробной переработке.
     Q_OBJECT

@@ -158,6 +158,7 @@ grpConnectionsSettings::grpConnectionsSettings(QWidget* pwgt) : GroupSetting(pwg
     layRightVBox->addWidget(m_leIP);
     layRightVBox->addWidget(m_lePort);
     layRightVBox->addWidget(m_chkActive);
+    layRightVBox->addStretch(1);
     //добавляем слой компановки с кнопками m_pbEdit, m_pbSave
     layRightVBox->addLayout(layRVBPushB);
 

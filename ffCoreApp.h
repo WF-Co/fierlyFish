@@ -24,8 +24,9 @@
 
 #include "ffTranslator.h"
 #include "ffSystemTray.h"
+#include "ffWndSettings.h"
 
-
+class ffWndSetting;
 
 //определяем основной класс приложения (ядро приложения). Класс coreApp унаследован от класса QApplication
 /*!
@@ -50,7 +51,10 @@ private:
     ffTranslator* m_pTranslator;
     //указатель на объект размещаемого в системном трее рабочих столов ОС
     ffSystemTray* m_psysTray;
-// ffTestWgt* m_pwndSettings;
+
+    //Отдельные окна приложения
+    //окно настроек приложения
+    ffWndSetting* m_pWndSettingsApp;
 
 private slots:
     void writeSettings();
@@ -58,7 +62,7 @@ private slots:
 public slots:
     //слот показа диалогового окна "о приложении"
     void slotAbout();
-  //  void slotWndSettings();
+    void slotSettingsApp();
 
 public:
     //констуктор класса
@@ -70,8 +74,10 @@ public:
 
     //определяем и реализовываем метод взятия указателя на объект настроек приложения
     QSettings* settings();
-
+    //определяем и реализовывваем метод взятия указателя на объект интернационализации приложения
     ffTranslator* ffTrans();
+    //определяем и реализовываем метод взятия указателя на окно настроек приложения
+    ffWndSetting* pWndSettings();
 };
 
 #endif // COREAPP_H
