@@ -15,54 +15,6 @@ grpGeneralSettings::grpGeneralSettings(QWidget* pwgt) : GroupSetting(pwgt)
     this->setTitle(QObject::tr("GENERAL_SETTINGS"));
 }
 
-//====================== grpUsersSettings ================================
-
-grpUsersSettings::grpUsersSettings(QWidget* pwgt) : GroupSetting(pwgt)
-{
-    QListWidgetItem* pitem = 0;
-    QStringList lst;
-
-
-    this->setTitle(QObject::tr("USERS"));
-
-    m_lwgtUsers = new QListWidget(this);
-    m_lwgtUsers->setIconSize(QSize(48,48));
-
-    //подготавливаем список групп настроек
-
-    lst << QObject::tr("USER_1") << QObject::tr("USER_2") << QObject::tr("USER_3");
-
-    foreach(QString str, lst)
-    {
-      //создаем элемент списка виждетов
-      pitem = new QListWidgetItem(str, m_lwgtUsers);
-      //устанавливаем иконку для созданного элемента
-      pitem->setIcon(QPixmap(":/" + str + ".png"));
-    }
-
-    m_lwgtUsers->resize(125,320);
-
-
-
-    m_lblUser = new QLabel(QObject::tr("TESTINGS_TEXT"));
-
-
-    QHBoxLayout* layoutHBox = new QHBoxLayout;
-
-
-    //устанавливаем толщину рамки в 10 пикселов со всех четырех сторон
-    layoutHBox->setContentsMargins(10,10,10,10);
-    //задаем расстояние между виджетами. 20 пикселей
-    layoutHBox->setSpacing(20);
-
-    //добавляем виджеты на создаваемый слой компановки
-    layoutHBox->addWidget(m_lwgtUsers);
-     layoutHBox->addWidget(m_lblUser);
-
-    //устанавливаем созданный слой компановки
-    setLayout(layoutHBox);
-}
-
 //====================== grpConnectionsSettings ================================
 
 grpConnectionsSettings::grpConnectionsSettings(QWidget* pwgt) : GroupSetting(pwgt)

@@ -3,11 +3,8 @@
 \brief Класс окна настроек приложения fieryFish
 \author Ершов Виктор
 \version 0.0.001
-\date Июль 2020 года
+\date Март 2021 года
 
-\todo задача 1
-\todo задача 2
-\todo задача 3
 */
 
 #ifndef FFWNDSETTINGS_H
@@ -17,6 +14,7 @@
 #include <QDialog>
 #include <QListWidget>
 #include <QStackedWidget>
+#include <QPushButton>
 
 // включаем заголовочный файл класса coreApp
 #include "ffCoreApp.h"
@@ -39,6 +37,8 @@ private:
     QListWidget* lwgSettings;
     //стек виджетов на слои компоноки визуальных логических групп настроек
     QStackedWidget* stackWgtSettings;
+
+
 
 protected:
 

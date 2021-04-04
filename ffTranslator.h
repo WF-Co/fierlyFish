@@ -1,3 +1,12 @@
+/*!
+\file
+\brief Модуль локализации приложения fieryFish
+\author Ершов Виктор
+\version 0.0.001
+\date Февраль 2021 года
+
+*/
+
 #ifndef TRANSLATOR_H
 #define TRANSLATOR_H
 

@@ -24,28 +24,38 @@ ffMDIWindow::ffMDIWindow(QWidget *parent)
     // добавляем действие в меню в виде пункта меню
     pmnuFile->addAction(QObject::tr("SUBMNUCLOSE"), qApp, SLOT(closeAllWindows()),QKeySequence ("CTRL+Q"));
 
-    //создаем Настройки
+    //создаем меню "Настройки"
     QMenu* pmnuSettings = new QMenu(QObject::tr("MNUSETTINGS"));
 
+    //создаем действие для меню "Настройки" в виде пункта меню "Настройки"
+    QAction* pactSettings = new QAction(QObject::tr("APPSETTINGS"), this);
+    //соединяем действие со слотом вызова окна настроек приложения
+    connect(pactSettings, &QAction::triggered, ffCoreApp::theApp(), &ffCoreApp::slotSettingsApp);
+
+    //добавляем подменю "Локализация" в меню "Настройки"
     pmnuSettings->addMenu(ffCoreApp::theApp()->ffTrans()->getMnuLang());
+    //добавляем разделитель в списке пунктов меню в меню "Настройки"
     pmnuSettings->addSeparator();
-    m_actAppSettings = pmnuSettings->addAction(QObject::tr("APPSETTINGS"),this, SLOT(slotSettingsApp()));
-
-
-    //информационное сообщение
-    /*
-     * QMessageBox::information(0,"Information","Operation Complete");
-     */
+    //добавляем пункт меню "Настройки" в меню "Настройки"
+    pmnuSettings->addAction(pactSettings);
 
     //создаем меню Помощь
     QMenu* pmnuHelp = new QMenu(QObject::tr("MNUHELP"));
 
-    //добавляем действие в меню в виде пункта меню
-    pmnuHelp->addAction(QObject::tr("SUBMNUABOUT"), this, SLOT(slotAbout()), Qt::Key_F1);
+    //создаем действие для меню "Помощь" в виде пункта меню "О приложении"
+    QAction* pactAbout = new QAction(QObject::tr("SUBMNUABOUT"), this);
+    //соединяем действие со слотом вызова окна "О приложении"
+    connect(pactAbout, &QAction::triggered, ffCoreApp::theApp(), &ffCoreApp::slotAbout);
+
+    //Добавляем пункт меню "О приложении" в меню "Помощь"
+    pmnuHelp->addAction(pactAbout);
 
     //добавляем созданние меню в строку меню главного окна
+    //Добавлем меню "Файл" в строку меню окна приложения
     menuBar()->addMenu(pmnuFile);
+    //Добавляем меню "Настройки" в строку меню окна приложения
     menuBar()->addMenu(pmnuSettings);
+    //Добавляем меню "Помощь" в строку меню окна приложения
     menuBar()->addMenu(pmnuHelp);
 
     //создаем MDI область в главном окне приложения
@@ -113,18 +123,6 @@ void ffMDIWindow::writeSettings()
 ffMDIWindow::~ffMDIWindow()
 {
 
-}
-
-//слот показа виджета о приложении.
-void ffMDIWindow::slotAbout()
-{
-    ffCoreApp::theApp()->slotAbout();
-}
-
-//слот вывода окна настроек приложения
-void ffMDIWindow::slotSettingsApp()
-{   
-    ffCoreApp::theApp()->slotSettingsApp();
 }
 
 void ffMDIWindow::createStatusBar()

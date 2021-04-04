@@ -19,6 +19,7 @@ ffWndSetting::ffWndSetting(QWidget *parent):QDialog(parent)
     //Widgets
     QListWidgetItem* pitem = 0;
 
+    //создаем стек виджетов сгруппированных по группам
     stackWgtSettings = new QStackedWidget(this);
 
     //создаем список групп настроек приложения
@@ -27,7 +28,7 @@ ffWndSetting::ffWndSetting(QWidget *parent):QDialog(parent)
     lwgSettings->setIconSize(QSize(48,48));
 
     //подготавливаем список групп настроек
-    lst << QObject::tr("GENERAL_SETTINGS") << QObject::tr("USERS") << QObject::tr("CONNECTIONS_DATABASES");
+    lst << QObject::tr("GENERAL_SETTINGS") << QObject::tr("CONNECTIONS_DATABASES");
 
     //заполняем QListWidget созданным списком
     foreach(QString str, lst)
@@ -48,15 +49,7 @@ ffWndSetting::ffWndSetting(QWidget *parent):QDialog(parent)
               stackWgtSettings->addWidget(pgrpGS);
               break;
             }
-        case 1:
-            {
-              //создаем виджет пользователей(аккаунтов)
-              grpUsersSettings*  pgrpUS = new grpUsersSettings;
-              //размещаем в конец контейнера виджетов указатель созданного виджета логической группы настроек
-              stackWgtSettings->addWidget(pgrpUS);
-              break;
-            }
-          case 2:
+          case 1:
            {
               //создаем виджет соединений с БД
               grpConnectionsSettings* pgrpCS = new grpConnectionsSettings;
@@ -73,21 +66,51 @@ ffWndSetting::ffWndSetting(QWidget *parent):QDialog(parent)
     //Connection
    connect(lwgSettings, &QListWidget::clicked, this, &ffWndSetting::selectChangeGrpSettings);
 
-   //Layout
-    QHBoxLayout* phbxLayout = new QHBoxLayout;
+    //Создаем слой компановки 2 уровня, где размещаем список групп настроек и стек виджетов (сгруппированных)
+    QHBoxLayout* phbxElemLayout_level2 = new QHBoxLayout;
 
     //устанавливаем толщину рамки в 10 пикселов со всех четырех сторон
-    phbxLayout->setContentsMargins(10,10,10,10);
+    phbxElemLayout_level2->setContentsMargins(10,10,10,10);
 
     //задаем расстояние между виджетами. 20 пикселей
-    phbxLayout->setSpacing(20);
+    phbxElemLayout_level2->setSpacing(20);
 
     //добавляем виджеты на создаваемый слой компановки
-    phbxLayout->addWidget(lwgSettings);
-    phbxLayout->addWidget(stackWgtSettings);
+    phbxElemLayout_level2->addWidget(lwgSettings);
+    phbxElemLayout_level2->addWidget(stackWgtSettings);
 
-    //устанавливаем созданный слой компановки
-    setLayout(phbxLayout);
+    //Создаем слой компаноки 1 уровня в нем размещаем сверху слой компаноки 2 уровня и кнопки снизу "ОК", "Применить", "Отмена"
+    QVBoxLayout* pvbxLayoutGeneral = new QVBoxLayout;
+    //устанавливаем толщину рамки в 10 пикселов со всех четырех сторон
+    pvbxLayoutGeneral->setContentsMargins(10,10,10,10);
+
+    QPushButton* ptPBOk = new QPushButton(QObject::tr("OK"), this);
+    connect(ptPBOk, &QPushButton::clicked, this, &ffWndSetting::accept);
+
+    QPushButton* ptPBAccept = new QPushButton(QObject::tr("ACCEPT"),this);
+    connect(ptPBAccept, &QPushButton::clicked, this, &ffWndSetting::accept);
+
+    QPushButton* ptPBCancel = new  QPushButton(QObject::tr("CANCEL"), this);
+    connect(ptPBCancel, &QPushButton::clicked, this, &ffWndSetting::close);
+
+    //Создаем слой компановки 2 уровня для QPushButton управления диалоговым окном
+    QHBoxLayout* phbxPBLayout_level2 = new QHBoxLayout;
+    //устанавливаем толщину рамки в 10 пикселов со всех четырех сторон
+    phbxPBLayout_level2->setContentsMargins(10,10,10,10);
+    //Вставляем в начало отступ
+    phbxPBLayout_level2->addSpacing(50);
+    //Добавляем по очереди кнопки "ОК", "Применить", "Отмена"
+    phbxPBLayout_level2->addWidget(ptPBOk);
+    phbxPBLayout_level2->addWidget(ptPBAccept);
+    phbxPBLayout_level2->addWidget(ptPBCancel);
+
+
+    //Добавляем слой компановки 2 уровня
+    pvbxLayoutGeneral->addLayout(phbxElemLayout_level2);
+    pvbxLayoutGeneral->addLayout(phbxPBLayout_level2);
+
+    //устанавливаем созданный слой компановки 1 уровня
+    setLayout(pvbxLayoutGeneral);
 }
 
 void ffWndSetting::selectChangeGrpSettings()

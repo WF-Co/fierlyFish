@@ -1,3 +1,12 @@
+/*!
+\file
+\brief Классы сгруппированных настроек для окна Настроек приложения fieryFish
+\author Ершов Виктор
+\version 0.0.001
+\date Март 2021 года
+
+*/
+
 #ifndef FFGROUPSETTINGS_H
 #define FFGROUPSETTINGS_H
 
@@ -38,35 +47,6 @@ class grpGeneralSettings : public GroupSetting {
 private:
 public:
     grpGeneralSettings(QWidget* pwgt=0);
-};
-
-/*!
- * \brief The grpUsersSettings class
-Класс от логической группы настроек "Пользователи". В этой группе объединены элементы управления для изменения основных настроек приложения
-*/
-
-class grpUsersSettings : public GroupSetting {
-    Q_OBJECT
-private:
-    //список пользователей
-    QListWidget* m_lwgtUsers;
-
-    //Имя пользователя
-
-    //Логин пользователя
-
-    //пароль пользователя
-
-
-    //галочка сохранять пароль или нет
-
-
-
-    //testing widget
-    QLabel*  m_lblUser;
-
-public:
-    grpUsersSettings(QWidget* pwgt=0);
 };
 
 /*!

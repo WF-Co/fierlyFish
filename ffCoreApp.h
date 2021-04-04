@@ -5,13 +5,6 @@
 \version 0.0.001
 \date Февраль 2020 года
 
-\todo задача 1
-456
-900
-7777
-
-\todo задача 2
-\todo задача 3
 */
 
 
@@ -58,6 +51,7 @@ private:
 
 private slots:
     void writeSettings();
+    void slotCloseSettingsApp();
 
 public slots:
     //слот показа диалогового окна "о приложении"

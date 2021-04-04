@@ -1,3 +1,12 @@
+/*!
+\file
+\brief Основное окно приложения приложения fieryFish
+\author Ершов Виктор
+\version 0.0.001
+\date Февраль 2020 года
+
+*/
+
 #ifndef MAINWND_H
 #define MAINWND_H
 //включаем заголовочные файлы Qt
@@ -39,8 +48,6 @@ protected:
     void createStatusBar();
 
 private slots:
-    void slotAbout();
-    void slotSettingsApp();
 
 signals:
     void signalSettings();
@@ -49,11 +56,6 @@ private:
     QMdiArea*       m_pma;
     QMenu*          m_pmnuWindows;
     QLabel*         m_pstatDateLabel;
-
-    //Все QActions QMenu
-    QAction*        m_actAppSettings;
-
-    //Окна приложения
 
 };
 #endif // MAINWND_H

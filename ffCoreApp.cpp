@@ -20,7 +20,7 @@ ffCoreApp::ffCoreApp(int& argc, char** argv, const QString& strOrg, const QStrin
     connect(this, &QApplication::lastWindowClosed, this, &ffCoreApp::writeSettings);
 
     //создаем окно настроек приложеиня
-    m_pWndSettingsApp = new ffWndSetting;
+    m_pWndSettingsApp = nullptr;
 }
 
 ffCoreApp::~ffCoreApp(){}
@@ -62,19 +62,42 @@ void ffCoreApp::slotAbout()
 
 void ffCoreApp::slotSettingsApp()
 {
-
-    //проверяем окно показывается пользователю или нет. В случае если окно показывается мы его делаем активным иначе показываем окно
-    if(!m_pWndSettingsApp->isVisible())
+    //проверяем существует окно или нет
+    if(!m_pWndSettingsApp)
     {
-        m_pWndSettingsApp->show();
-    }
-    else
-    {
-        m_pWndSettingsApp->activateWindow();
+       //создаем окно настроек (загружаем)
+       m_pWndSettingsApp = new ffWndSetting;
+       //соединяем сигнал окна настроек окончание работы со слотом выгрузки (slotCloseSettingsApp) из памяти окна
+       connect(m_pWndSettingsApp, &ffWndSetting::finished, this, &ffCoreApp::slotCloseSettingsApp);
     };
 
+    if(m_pWndSettingsApp)
+    {
+        //проверяем окно показывается пользователю или нет. В случае если окно показывается мы его делаем активным иначе показываем окно
+        if(!m_pWndSettingsApp->isVisible())
+        {
+            //если окно не видимо пользователю, то показываем его
+            m_pWndSettingsApp->show();
+        }
+        else
+        {
+            //если окно видимо пользователю, но оно не активно - делаем активным актом (фокус)
+            m_pWndSettingsApp->activateWindow();
+        };
 
+        //проверяем окно свернуто или нет. если окно свернуто, то разворачивеам его и делаем активным
+        if(m_pWndSettingsApp->isMinimized())
+            m_pWndSettingsApp->showNormal();
+     };
 
+}
+
+void ffCoreApp::slotCloseSettingsApp()
+{
+    //выгружаем из памяти окно настроек
+    delete m_pWndSettingsApp;
+    //устанавливаем нулевой указатель
+    m_pWndSettingsApp = nullptr;
 }
 
 
