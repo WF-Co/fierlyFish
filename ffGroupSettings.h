@@ -33,6 +33,7 @@ class GroupSetting : public QGroupBox{
     Q_OBJECT
 private:
 public:
+    //! конструктор класса
     GroupSetting(QWidget* pwgt = 0);
 };
 
@@ -46,6 +47,7 @@ class grpGeneralSettings : public GroupSetting {
     Q_OBJECT
 private:
 public:
+    //! конструктор класса
     grpGeneralSettings(QWidget* pwgt=0);
 };
 
@@ -59,28 +61,38 @@ class grpConnectionsSettings : public GroupSetting {
 private:
 
     //список соединений к серверам
+    //! указатель на список сохраненных соединений с сервером СУБД
     QListWidget* m_lwgConnections;
 
     //кнопка добавить соединение
+    //! указатель на кнопку добавить соединение
     QPushButton* m_pbAdd;
+
     //кнопка удалить соединение
+    //! указатель на кнопку удалить соединение
     QPushButton* m_pbRemove;
 
     //адрес сервера
+    //! указатель на текстовое поле с IP адресом сервера СУБД
     QLineEdit* m_leIP;
 
     //порт сервера
+    //! указатель на текстовое поле с портом сервера СУБД
     QLineEdit* m_lePort;
 
     //активное соединение
+    //! указатель на чекбокс (отметка) о активном (по умолчанию) соединения
     QCheckBox* m_chkActive;
 
     //кнопка изменить соединение
+    //! указатель на кнопку изменить выбранное соединение
     QPushButton* m_pbEdit;
     //кнопка сохранить изменения
+    //! указатель на кнопку сохранить измененное соединение
     QPushButton* m_pbSave;
 
 public:
+    //! конструктор класса
     grpConnectionsSettings(QWidget* pwgt=0);
 };
 
